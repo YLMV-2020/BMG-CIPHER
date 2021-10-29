@@ -8,9 +8,10 @@ struct Data
 {
 	char letter;
 	int count;
+	Data(char letter, int count) :letter(letter), count(count) {}
 };
 
-
+void decryptMessage(const string& message, const string& freqLang);
 
 int main()
 {
@@ -28,38 +29,37 @@ int main()
 
 	string freqLang = "TEOAISRHNUCMDLGWFPYKJBVQX";
 
-	map<char, int> myMap;
+	decryptMessage(message, freqLang);
+
+	return 0;
+}
+
+void decryptMessage(const string& message, const string& freqLang)
+{
 	map<char, char> myMapDecrypt;
-
-	for (int i = 0; i < message.size(); i++)
-	{
-		if (message[i] >= 'a' && message[i] <= 'z')
-			myMap[message[i]]++;
-		else if (message[i] >= 'A' && message[i] <= 'Z')
-			myMap[message[i] + 32]++;
-	}
-
 	vector<Data> data;
 
-	for (auto it = myMap.begin(); it != myMap.end(); it++)
-	{
-		Data newData;
-		newData.letter = it->first;
-		newData.count = it->second;
+	int messajeSize = message.size();
 
-		data.push_back(newData);
+	for (int i = 0; i < messajeSize; i++)
+	{
+		if (message[i] >= 'a' && message[i] <= 'z')
+			myMapDecrypt[message[i]]++;
+		else if (message[i] >= 'A' && message[i] <= 'Z')
+			myMapDecrypt[message[i] + 32]++;
 	}
+
+	for (auto it = myMapDecrypt.begin(); it != myMapDecrypt.end(); it++) data.push_back(Data(it->first, it->second));
 
 	sort(data.begin(), data.end(), [](Data a, Data b) {
 		return a.count > b.count;
 		});
 
-	for (int i = 0; i < data.size(); i++)
-	{
-		myMapDecrypt[data[i].letter] = freqLang[i] + 32;
-	}
+	myMapDecrypt.clear();
 
-	for (int i = 0; i < message.size(); i++)
+	for (int i = 0; i < data.size(); i++) myMapDecrypt[data[i].letter] = freqLang[i] + 32;
+	
+	for (int i = 0; i < messajeSize; i++)
 	{
 		if (message[i] >= 'a' && message[i] <= 'z')
 			cout << myMapDecrypt[message[i]];
@@ -68,7 +68,4 @@ int main()
 		else
 			cout << message[i];
 	}
-
-	return 0;
 }
-
