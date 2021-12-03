@@ -25,12 +25,3 @@ Tu programa debe imprimir el texto desencriptado en pantalla.
 No uses archivos ni pidas ingresar datos.
 
 **Mantener las mayúsculas y minúsculas del mensaje, así como los saltos de linea.**
-
-## Construido con 🛠️
-
-* C++ - Lenguaje de programación
-* [Visual Studio 2019](https://visualstudio.microsoft.com/es/downloads/) - IDE
-
-## Autor ✒️
-
-* **Yordy Leonidas** - *Implementación* - [YLMV-2020](https://github.com/YLMV-2020)
